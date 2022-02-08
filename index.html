@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel='stylesheet' href="./assets/style.css">    
     <title>Find a pet</title>
 </head>
 
@@ -13,18 +17,46 @@
         <h1>Find a pet near you</h1>
     </header>
 
-    <div class="row">
-        <div class="col-lg-3 d-flex flex-column">
-            <h4 class="m-2">Search by zip:</h4>
-            <input id="zipInput" type="text" placeholder=" Enter city" class="m-2 border">
-            <button id="search" class="btn btn-primary m-2" type="button">
-                Search
-            </button>
-            <button id="clear" class="btn btn-dark m-2" type="button">
-                Clear Searches
-            </button>
+    <main class="flex-row justify-space-between">
+
+        <div class="columns">
+            <div class="card column is-3">
+                <h4 class="card-header m-2">Search by zip:</h4>
+                <input id="zipInput" type="text" placeholder=" Enter zipcode" class="m-2 border">
+                <button id="search" class="btn btn-primary m-2" type="button">
+                    Search
+                </button>
+            </div>
+            <div class="card column is-9">
+                <h4 class="card-header m-2">Save your favorites to the list!</h4>
+                <button id="saveDog" class="btn btn-dark m-2 p-2" type="button">
+                    Favorite
+                </button>
+            </div>
         </div>
-    </div>
+
+        <div class="columns pt-5">
+            <div class="card column is-3">
+                <h4 class="card-header m-2">Saved list</h4>
+                <ul id="saved-list" class="p-2">
+                    <li>dog 1</li>
+                    <li>dog 2</li>
+                    <li>dog 3</li>
+                    <li>dog 4</li>
+                </ul>
+                <button id="clear" class="btn btn-dark m-2 p-2" type="button">
+                    Clear Searches
+                </button>
+            </div>
+            <div class="card column is-9">
+                <h4 class="card-header m-2">Random fact about current dog</h4>
+                <p id="dogfact" class="p-2">This dog is super cool.</p>
+            </div>
+        </div>
+
+
+
+    </main>
 
 </body>
 
