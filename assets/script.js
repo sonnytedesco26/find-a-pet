@@ -5,4 +5,11 @@ window.FavoriteStarElement = document.registerElement(
     'favorite-star', 
     { prototype: proto }
 );
-var proto = Object.create(HTMLElement.prototype);
+    var saveBtn= document.getElementById("saveDog");
+
+    saveBtn.addEventListener("click",myFunction); 
+    function myFunction()
+    {
+        document.getElementById("saved-list").innerHTML = "hey";
+  }
+

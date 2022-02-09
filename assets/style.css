@@ -1,9 +1,16 @@
+header {
+  background: linear-gradient(45deg, #7aabd7, #0084f9);
+}
+
 h1 {
     font-weight: 800;
+    
 }
+
 h4 {
     background: linear-gradient(45deg, #07fff362, transparent);
 }
+
 .favorite-star-character {
     color: #ccd6dd;
     cursor: pointer;
