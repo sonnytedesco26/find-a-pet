@@ -1,10 +1,18 @@
-// const apiKey = "sHxGwmiK3oD1A33jienk7QUloE04aUXJcYj9OezNWuwdDq4Auf";
+const apiKey = "sHxGwmiK3oD1A33jienk7QUloE04aUXJcYj9OezNWuwdDq4Auf";
+const apiSecret = "iilHX2WeaB32z0UiDuGCUblsqUZgzMhJPkBEZEUh";
 
-// const apiSecret = "iilHX2WeaB32z0UiDuGCUblsqUZgzMhJPkBEZEUh";
-// window.FavoriteStarElement = document.registerElement(
-//     'favorite-star', 
-//     { prototype: proto }
-// );
+
+
+fetch("https://api.petfinder.com/v2/oauth2/token", {
+    method: "POST",
+    body:
+        "grant_type=client_credentials&client_id=" + apiKey + "&client_secret=" + apiSecret,
+    headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+    },
+})
+
+
 var saveBtn = document.getElementById("saveDog");
 
 saveBtn.addEventListener("click", myFunction);
@@ -16,5 +24,5 @@ var clearBtn = document.getElementById("clear");
 
 clearBtn.addEventListener("click", clearHistory)
 function clearHistory() {
-    document.getElementById("saved-list").innerHTML = ""
+    document.getElementById("saved-list").innerHTML = "";
 }
