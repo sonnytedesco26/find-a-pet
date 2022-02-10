@@ -9,6 +9,7 @@ var searchBtn = document.getElementById("search");
 
 
 
+
 searchBtn.addEventListener("click", function (e) {
     e.preventDefault();
     var userInput = document.getElementById("breedInput").value;
@@ -29,7 +30,18 @@ searchBtn.addEventListener("click", function (e) {
     }).then(function(data){
         console.log('token', data)
 
-        return fetch('https://api.petfinder.com/v2/animals?organization=' + zipCode + '&status=' + breed,)
+        return fetch('https://api.petfinder.com/v2/animals?' + searchBtn ,{
+            headers: {
+                'Authorization': data.token_type + ' ' + data.access_token,
+
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(function (response){
+            return response.json();
+
+        }).then(function (data){
+            console.log(userInput, data)
+        })
 
     }).catch(function(error){
         console.log('something went wrong', error)
