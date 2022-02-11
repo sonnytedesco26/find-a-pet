@@ -10,40 +10,40 @@ var searchBtn = document.getElementById("search");
 
 
 
+
 searchBtn.addEventListener("click", function (e) {
     e.preventDefault();
-    var userInput = document.getElementById("breedInput").value;
-    fetch(`https://dog.ceo/api/breed/${userInput}/images`)
-        .then(function (response) { return response.json() })
-        .then(data => console.log(data));
-    console.log(userInput);
+    var userInput = document.getElementById("zipInput").value;
     fetch("https://api.petfinder.com/v2/oauth2/token", {
         method: "POST",
         body: "grant_type=client_credentials&client_id=" + apiKey + "&client_secret=" + apiSecret,
         headers: {
             "Content-Type": "application/x-www-form-urlencoded",
         }
-    }).then(function(response) {
+    }).then(function (response) {
         return response.json();
 
 
-    }).then(function(data){
+    }).then(function (data) {
         console.log('token', data)
 
-        return fetch('https://api.petfinder.com/v2/animals?' + searchBtn ,{
+        return fetch('https://api.petfinder.com/v2/animals?location=' + userInput + '&page=1&type=dog', {
             headers: {
                 'Authorization': data.token_type + ' ' + data.access_token,
 
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
-        }).then(function (response){
+        }).then(function (response) {
             return response.json();
 
-        }).then(function (data){
+        }).then(function (data) {
             console.log(userInput, data)
+            return `<p>Name: </p> ${data.name}`
+            
+
         })
 
-    }).catch(function(error){
+    }).catch(function (error) {
         console.log('something went wrong', error)
     })
 
