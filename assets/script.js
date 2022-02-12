@@ -67,3 +67,20 @@ searchBtn.addEventListener('click', function(){
         })
         .catch(err=>console.log(err))
 })
+
+$('.addToFavBtn').on('click', event => {
+    var storeName = $(event.target).parents()[1].firstElementChild.innerHTML;
+  
+    var favorites = localStorage.getItem("favorites");
+    if (!favorites){
+      localStorage.setItem("favorites", JSON.stringify({stores:[0]}));
+      favorites = JSON.parse(localStorage.getItem("favorites"));
+    }else{
+      favorites = JSON.parse(favorites);
+    }
+    
+    favorites.stores.push(storeName);
+  
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  
+  });
