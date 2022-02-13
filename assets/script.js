@@ -9,6 +9,7 @@ var saveBtn = document.getElementById("saveDog");;
 var clearBtn = document.getElementById("clear");
 var searchBtn = document.getElementById("search");
 var factBtn = document.getElementById('fact-btn');
+var image = document.getElementById("image")
 
 
 
@@ -60,6 +61,16 @@ function createFact() {
     document.getElementById("dogfact").innerHTML =
         dogArray[Math.floor(Math.random() * dogArray.length)];
 }
+factBtn.addEventListener('click', function () {
+    fetch(`https://dog.ceo/api/breeds/image/random`)
+        .then(res => res.json())
+        .then(result => {
+            console.log(result)
+            image.setAttribute("src", result.message[0])
+            console.log()
+        })
+        .catch(err => console.log(err))
+})
 
 
 saveBtn.addEventListener("click", myFunction);
@@ -78,17 +89,11 @@ function displayFinder(data) {
 
 }
 
-function loadListofBreeds() {
-    fetch("https://dog.ceo/api/breeds/list/all")
+// function loadListofBreeds() {
+//     fetch("https://dog.ceo/api/breeds/list/all")
 
-        .then(function (response) { return response.json() })
-        .then(data => console.log(data));
-}
+//         .then(function (response) { return response.json() })
+//         .then(data => console.log(data));
+// }
 
-function getDog() {
 
-    fetch(`https://dog.ceo/api/${userInput}/image/random`)
-        .then(function (response) { return response.json() })
-        .then(data => console.log(data));
-    console.log(userInput);
-}
