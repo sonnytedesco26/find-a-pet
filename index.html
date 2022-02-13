@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel='stylesheet' href="./assets/style.css">
     <link rel="import" href="path/to/favorite-star.html">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <title>Find a pet</title>
 </head>
 
@@ -21,15 +22,22 @@
 
         <div class="columns">
             <div class="card column is-3">
-                <h4 class="card-header m-2">Search by breed:</h4>
-                <input id="breedInput" type="text" placeholder=" Enter breed" class="m-2 border">
+                <h4 class="card-header m-2">Search by Zipcode:</h4>
+                <input id="zipInput" type="text" placeholder=" Enter zipcode" class="m-2 border">
                 <button id="search" class="btn btn-primary m-2" type="button">
                     Search
                 </button>
             </div>
             <div class="card column is-9">
                 <h4 class="card-header m-2">Save your favorites to the list!</h4>
-                <p id= dogList class="p-3"></p>
+                <div id="currentDog" class="p-3">
+                    <h2 id="dogName"></h2>
+                    <p id="dogAge"></p>
+                    <p id="dogBreed"></p>
+                    <img id="dogPic">
+                    <p id="dogGender"></p>
+                    <p id="dogContact"></p>
+                </div>
                 <button id="saveDog" class="btn btn-dark m-2 column is-2" type="button">
                     <favorite-star><span>&#11088;</span></favorite-star>
                 </button>
@@ -50,8 +58,12 @@
                 </button>
             </div>
             <div class="card column is-9">
-                <h4 class="card-header m-2">Random fact about current dog</h4>
-                <p id="dogfact" class="p-2">This dog is super cool.</p>
+                <h4 class="card-header m-2">Learn something new about dogs</h4>
+                <p id="dogfact" class="p-4"></p>
+                <img id="image" width="300px">
+                <button id="fact-btn" class="btn btn-dark m-2 column is-2" type="button">
+                    Random Fact Generator
+                </button>
             </div>
         </div>
 

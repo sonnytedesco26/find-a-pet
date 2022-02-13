@@ -1,50 +1,95 @@
-// window.FavoriteStarElement = document.registerElement(
-//     'favorite-star', 
-//     { prototype: proto }
-// );
+const apiKey = 'sHxGwmiK3oD1A33jienk7QUloE04aUXJcYj9OezNWuwdDq4Auf'
+const apiSecret = 'iilHX2WeaB32z0UiDuGCUblsqUZgzMhJPkBEZEUh'
 
-var dogArray = [];
+const dogArray = ['It is a myth that dogs are color blind. They can actually see in color, just not as vividly as humans. It is akin to our vision at dusk.', 'If never spayed or neutered, a female dog, her mate, and their puppies could produce over 66,000 dogs in 6 years!',
+    'A one year old dog is as mature, physically, as a 15 year old human.', 'An American Animal Hospital Assoc. poll found that 33% of dog owners admit to talking to their dogs on the phone and leaving answering machine messages for them while away.', "Dog's nose prints are as unique as a human's finger prints and can be used to accurately identify them.",
+    'Dogs have no sense of “time”.', "Every dog on earth likely descended from a species knows as the Tomarctus, a creature that roamed the earth over 15 million years ago.",];
 
 var saveBtn = document.getElementById("saveDog");;
 var clearBtn = document.getElementById("clear");
 var searchBtn = document.getElementById("search");
+var factBtn = document.getElementById('fact-btn');
+var image = document.getElementById("image")
+
+var dogName = $("#dogName");
+var dogAge = $("#dogAge");
+var dogBreed = $("#dogBreed");
+var dogPic = $("#dogPic");
+var dogGender = $("#dogGender");
+var dogContact = $("#dogContact");
+
+
+function renderDog(name, age, breed, pic, gender, contact){
+    dogName.text(name);
+    dogAge.text(age);
+    dogBreed.text(breed);
+    dogPic.attr("src", pic);
+    dogGender.text(gender);
+    dogContact.text(contact);
+}
+
+
 
 searchBtn.addEventListener("click", function (e) {
     e.preventDefault();
-    var userInput = document.getElementById("breedInput").value;
-    fetch(`https://dog.ceo/api/breed/${userInput}/images`)
-        .then(function (response) { return response.json() })
-        .then(data => console.log(data));
-    console.log(userInput);
-})
+    var userInput = document.getElementById("zipInput").value;
+    fetch("https://api.petfinder.com/v2/oauth2/token", {
+        method: "POST",
+        body: "grant_type=client_credentials&client_id=" + apiKey + "&client_secret=" + apiSecret,
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+        }
+    }).then(function (response) {
+        return response.json();
+    }).then(function (data) {
+        console.log('token', data)
 
-saveBtn.addEventListener("click", myFunction);
-function myFunction() {
-    document.getElementById("saved-list").innerHTML = "hey";
+        return fetch('https://api.petfinder.com/v2/animals?location=' + userInput + '&page=1&type=dog&limit=1&sort=random', {
+            headers: {
+                'Authorization': data.token_type + ' ' + data.access_token,
+
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(function (response) {
+            return response.json();
+
+        }).then(function (data) {
+            console.log(userInput, data)
+           // return `<p>Name: </p> ${data.name}`
+            console.log(data.animals[0].id)
+            console.log(data.animals[0].name, data.animals[0].age, data.animals[0].breeds.primary, data.animals[0].photos[0].medium, data.animals[0].gender, data.animals[0].contact.email);
+            renderDog(data.animals[0].name, data.animals[0].age, data.animals[0].breeds.primary, data.animals[0].photos[0].medium, data.animals[0].gender, data.animals[0].contact.email);
+        })
+
+    }).catch(function (error) {
+        console.log('something went wrong', error)
+    })
+
+
+});
+
+factBtn.addEventListener('click', createFact);
+function createFact() {
+    document.getElementById("dogfact").innerHTML = 
+        dogArray[Math.floor(Math.random() * dogArray.length)];
+    fetch(`https://dog.ceo/api/breeds/image/random`)
+        .then(res => res.json())
+        .then(result => {
+            (image.src = result.message)
+            
+        })
+        .catch(err => console.log(err))
 }
+
+saveBtn.addEventListener("click", saveDog);
+function saveDog() {
+    
+}
+
+
 
 clearBtn.addEventListener("click", clearHistory)
 function clearHistory() {
-    document.getElementById("saved-list").innerHTML = ""
-}
-
-
-
-function displayFinder(data) {
-
-}
-
-function loadListofBreeds() {
-    fetch("https://dog.ceo/api/breeds/list/all")
-
-        .then(function (response) { return response.json() })
-        .then(data => console.log(data));
-}
-
-function getDog() {
-
-    fetch(`https://dog.ceo/api/${userInput}/image/random`)
-        .then(function (response) { return response.json() })
-        .then(data => console.log(data));
-    console.log(userInput);
+    document.getElementById("saved-list").innerHTML = "";
+    localStorage.clear();
 }
