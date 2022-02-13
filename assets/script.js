@@ -11,6 +11,12 @@ var searchBtn = document.getElementById("search");
 var factBtn = document.getElementById('fact-btn');
 var image = document.getElementById("image")
 
+var dogName = document.getElementById("dogName");
+var dogAge = document.getElementById("dogAge");
+var dogBreed = document.getElementById("dogBreed");
+var dogPic = document.getElementById("dogPic");
+var dogGender = document.getElementById("dogGender");
+var dogContact = document.getElementById("dogContact");
 
 
 
@@ -44,7 +50,7 @@ searchBtn.addEventListener("click", function (e) {
 
         }).then(function (data) {
             console.log(userInput, data)
-            return `<p>Name: </p> ${data.name}`
+            console.log(data.animals[0].name)
 
 
         })

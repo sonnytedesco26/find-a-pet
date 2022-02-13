@@ -6,16 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel='stylesheet' href="./assets/style.css">
     <link rel="import" href="path/to/favorite-star.html">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <title>Find a pet</title>
+    <title>Find a pet</title>
 </head>
 
 <body>
     <header class="text-center p-3 text-light">
-        <h1><img src="https://img.icons8.com/windows/32/000000/dog-footprint.png" />  Find a dog near you   <img src="https://img.icons8.com/windows/32/000000/dog-footprint.png"/></h1>
+        <h1><img src="https://img.icons8.com/windows/32/000000/dog-footprint.png" /> Find a dog near you <img
+                src="https://img.icons8.com/windows/32/000000/dog-footprint.png" /></h1>
     </header>
 
     <main class="flex-row justify-space-between">
@@ -30,7 +32,14 @@
             </div>
             <div class="card column is-9">
                 <h4 class="card-header m-2">Save your favorites to the list!</h4>
-                <p id= dogList class="p-3"></p>
+                <div id="currentDog" class="p-3">
+                    <h2 id="dogName"></h2>
+                    <p id="dogAge"></p>
+                    <p id="dogBreed"></p>
+                    <img id="dogPic">
+                    <p id="dogGender"></p>
+                    <p id="dogContact"></p>
+                </div>
                 <button id="saveDog" class="btn btn-dark m-2 column is-2" type="button">
                     <favorite-star><span>&#11088;</span></favorite-star>
                 </button>
