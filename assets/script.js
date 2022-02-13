@@ -58,16 +58,15 @@ searchBtn.addEventListener("click", function (e) {
 
 factBtn.addEventListener('click', createFact);
 function createFact() {
-    document.getElementById("dogfact").innerHTML =
+    document.getElementById("dogfact").innerHTML = 
         dogArray[Math.floor(Math.random() * dogArray.length)];
 }
 factBtn.addEventListener('click', function () {
     fetch(`https://dog.ceo/api/breeds/image/random`)
         .then(res => res.json())
         .then(result => {
-            console.log(result)
-            image.setAttribute("src", result.message[0])
-            console.log()
+            (image.src = result.message)
+            
         })
         .catch(err => console.log(err))
 })
