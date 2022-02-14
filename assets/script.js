@@ -72,6 +72,10 @@ searchBtn.addEventListener("click", function (e) {
 
 });
 
+$(document).on("click", "#clickHistory", function() {
+
+})
+
 factBtn.addEventListener('click', createFact);
 function createFact() {
     document.getElementById("dogfact").innerHTML = 
@@ -85,10 +89,24 @@ function createFact() {
         .catch(err => console.log(err))
 }
 
-saveBtn.addEventListener("click", saveDog);
-function saveDog() {
-    
+saveBtn.addEventListener("click", function(){
+var idEl = document.getElementById('dogId').innerHTML;
+if(idEl == null || idEl == ""){
+    window.alert("Must search dog to add to saved list")
+} else{
+    let dogObj = {
+        name: document.getElementById("dogName").innerHTML,
+        id: document.getElementById("dogId").innerHTML
+    }
+    let dogObjSer = JSON.stringify(dogObj);
+    localStorage.setItem("savedDogs", dogObjSer)
+    let dogObjDes = JSON.parse(localStorage.getItem("savedDogs"));
+    console.log(dogObjDes);
+    var savedDogsList = localStorage.getItem("savedDogs");
+    console.log(savedDogsList);
 }
+}
+)
 
 
 
