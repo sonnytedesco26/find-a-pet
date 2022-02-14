@@ -17,15 +17,16 @@ var dogBreed = $("#dogBreed");
 var dogPic = $("#dogPic");
 var dogGender = $("#dogGender");
 var dogContact = $("#dogContact");
+var dogId = $("#dogId");
 
-
-function renderDog(name, age, breed, pic, gender, contact){
+function renderDog(name, age, breed, pic, gender, contact, id){
     dogName.text(name);
     dogAge.text(age);
     dogBreed.text(breed);
     dogPic.attr("src", pic);
     dogGender.text(gender);
     dogContact.text(contact);
+    dogId.text(id);
 }
 
 
@@ -56,9 +57,9 @@ searchBtn.addEventListener("click", function (e) {
 
         }).then(function (data) {
             console.log(userInput, data);
-            console.log(data.animal.id);
+            console.log(data.animals[0].id);
 
-            renderDog(data.animals[0].name, data.animals[0].age, data.animals[0].breeds.primary, data.animals[0].photos[0].medium, data.animals[0].gender, data.animals[0].contact.email);
+            renderDog(data.animals[0].name, data.animals[0].age, data.animals[0].breeds.primary, data.animals[0].photos[0].medium, data.animals[0].gender, data.animals[0].contact.email, data.animals[0].id);
             //renderDog(data.animal.name, data.animal.age, data.animal.breeds.primary, data.animal.photos[0].medium, data.animal.gender, data.animal.contact.email);
 
 
