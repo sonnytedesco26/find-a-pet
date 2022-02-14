@@ -85,13 +85,13 @@ $('.addToFavBtn').on('click', event => {
 
   localStorage.setItem("favorites", JSON.stringify(favorites));
 
-//   var saveBtn =JASON.parse(localStorage.getItem("saved-list")) || []
-//   var list = $("#list")
-//   function appendTodo(saveBtn){
-//   $.each(saveBtn, funtion(i, saveBtn)
-//   var le = $("<li>")
-//       li.text(todo.title)
-//       list.append(li)
+  var saveBtn =JASON.parse(localStorage.getItem("saved-list")) || []
+  var saved = $("#list")
+  function appendTodo(saveBtn){
+  $.each(saveBtn, funtion(i, saveBtn)
+  var le = $("<li>")
+      li.text(todo.title)
+      list.append(li)
       
 //       funtion appenTodo()todos{
 //           var li = $("<li>")
