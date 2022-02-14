@@ -43,8 +43,9 @@ searchBtn.addEventListener("click", function (e) {
         return response.json();
     }).then(function (data) {
         console.log('token', data)
-
         return fetch('https://api.petfinder.com/v2/animals?location=' + userInput + '&page=1&type=dog&limit=1&sort=random', {
+        
+        //return fetch('https://api.petfinder.com/v2/animals/53169484', {
             headers: {
                 'Authorization': data.token_type + ' ' + data.access_token,
 
@@ -54,11 +55,13 @@ searchBtn.addEventListener("click", function (e) {
             return response.json();
 
         }).then(function (data) {
-            console.log(userInput, data)
-           // return `<p>Name: </p> ${data.name}`
-            console.log(data.animals[0].id)
-            console.log(data.animals[0].name, data.animals[0].age, data.animals[0].breeds.primary, data.animals[0].photos[0].medium, data.animals[0].gender, data.animals[0].contact.email);
+            console.log(userInput, data);
+            console.log(data.animal.id);
+
             renderDog(data.animals[0].name, data.animals[0].age, data.animals[0].breeds.primary, data.animals[0].photos[0].medium, data.animals[0].gender, data.animals[0].contact.email);
+            //renderDog(data.animal.name, data.animal.age, data.animal.breeds.primary, data.animal.photos[0].medium, data.animal.gender, data.animal.contact.email);
+
+
         })
 
     }).catch(function (error) {
