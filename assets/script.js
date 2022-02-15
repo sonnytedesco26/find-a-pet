@@ -100,17 +100,6 @@ function createFact() {
 }
 
 
-function renderHistory(){
-    pastSaves.empty();
-
-    savedDogsList = JSON.parse(localStorage.getItem("savedDogs"));
-    for (i=0;i<=savedDogsList.length;i++){
-        var newSavedItem = $("<div>").attr("id", "clickHistory");
-        newSavedItem.text(savedDogsList[i]);
-        pastSaves.prepend(newSavedItem);
-    }
-}
-
 saveBtn.addEventListener("click", function(){
 var idEl = document.getElementById('dogId').innerHTML;
 if(idEl == null || idEl == ""){
@@ -132,6 +121,20 @@ if(idEl == null || idEl == ""){
 
     renderHistory();
 }})
+
+
+function renderHistory(){
+    pastSaves.empty();
+
+    savedDogsList = JSON.parse(localStorage.getItem("savedDogs"));
+    for (i=0; i < savedDogsList.length;i++){
+        var newSavedItem = $("<div>").attr("id", "clickHistory");
+        if(savedDogsList?.length > 0){
+            newSavedItem.text(`${savedDogsList[i].name} ---- ${savedDogsList[i].id}`);
+            pastSaves.prepend(newSavedItem);
+        }
+    }
+}
 
 clearBtn.addEventListener("click", clearHistory)
 function clearHistory() {
