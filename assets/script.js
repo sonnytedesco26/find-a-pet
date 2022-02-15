@@ -9,7 +9,8 @@ var saveBtn = document.getElementById("saveDog");;
 var clearBtn = document.getElementById("clear");
 var searchBtn = document.getElementById("search");
 var factBtn = document.getElementById('fact-btn');
-var image = document.getElementById("image")
+var image = document.getElementById("image");
+var savedList = document.getElementById("saved-list");
 
 var dogName = $("#dogName");
 var dogAge = $("#dogAge");
@@ -98,17 +99,25 @@ if(idEl == null || idEl == ""){
         name: document.getElementById("dogName").innerHTML,
         id: document.getElementById("dogId").innerHTML
     }
-    let dogObjSer = JSON.stringify(dogObj);
-    localStorage.setItem("savedDogs", dogObjSer)
-    let dogObjDes = JSON.parse(localStorage.getItem("savedDogs"));
-    console.log(dogObjDes);
-    var savedDogsList = localStorage.getItem("savedDogs");
+    var savedDogsList;
+    if(JSON.parse(localStorage.getItem("savedDogs")) == null){
+        savedDogsList = [];
+    } else{
+        savedDogsList = JSON.parse(localStorage.getItem("savedDogs"));
+    }
+    savedDogsList.push(dogObj);
+    localStorage.setItem("savedDogs", JSON.stringify(savedDogsList));
     console.log(savedDogsList);
-}
-}
-)
-
-
+    
+    function renderHistory(){
+        for (i=0;i<=savedDogsList.length;i++){
+            var li = document.createElement("li");
+            li.appendChild(document.createTextNode(savedDogsList[i].name));
+            savedList.appendChild(li);
+        }
+    }
+    renderHistory();
+}})
 
 clearBtn.addEventListener("click", clearHistory)
 function clearHistory() {
