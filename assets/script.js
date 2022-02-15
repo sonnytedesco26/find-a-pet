@@ -106,7 +106,7 @@ function renderHistory(){
     savedDogsList = JSON.parse(localStorage.getItem("savedDogs"));
     for (i=0;i<=savedDogsList.length;i++){
         var newSavedItem = $("<div>").attr("id", "clickHistory");
-        newSavedItem.text(savedDogsList[i])
+        newSavedItem.text(savedDogsList[i]);
         pastSaves.prepend(newSavedItem);
     }
 }
@@ -135,6 +135,6 @@ if(idEl == null || idEl == ""){
 
 clearBtn.addEventListener("click", clearHistory)
 function clearHistory() {
-    document.getElementById("saved-list").innerHTML = "";
+    document.getElementById("pastSaves").innerHTML = "";
     localStorage.clear();
 }
