@@ -104,6 +104,14 @@ if(idEl == null || idEl == ""){
     console.log(dogObjDes);
     var savedDogsList = localStorage.getItem("savedDogs");
     console.log(savedDogsList);
+
+    function savedDogs(){
+        var savedDogsList = localStorage.getItem($("#dogname"));
+        var savedDogsList = localStorage.getItem($("#dogId"));
+        document.getElementById('dogname').value = currentDogname
+        document.getElementById('dogID').value = currentDogId
+
+    }
 }
 }
 )
