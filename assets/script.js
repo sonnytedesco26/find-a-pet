@@ -11,6 +11,7 @@ var searchBtn = document.getElementById("search");
 var factBtn = document.getElementById('fact-btn');
 var image = document.getElementById("image");
 var savedList = document.getElementById("saved-list");
+var pastSaves = $("#pastSaves");
 
 var dogName = $("#dogName");
 var dogAge = $("#dogAge");
@@ -19,6 +20,14 @@ var dogPic = $("#dogPic");
 var dogGender = $("#dogGender");
 var dogContact = $("#dogContact");
 var dogId = $("#dogId");
+
+var savedDogsList;
+
+if (JSON.parse(localStorage.getItem("savedDogs")) == null) {
+    console.log("saved dogs empty")
+} else {
+    renderHistory();
+}
 
 function renderDog(name, age, breed, pic, gender, contact, id){
     dogName.text(name);
@@ -90,6 +99,18 @@ function createFact() {
         .catch(err => console.log(err))
 }
 
+
+function renderHistory(){
+    pastSaves.empty();
+
+    savedDogsList = JSON.parse(localStorage.getItem("savedDogs"));
+    for (i=0;i<=savedDogsList.length;i++){
+        var newSavedItem = $("<div>").attr("id", "clickHistory");
+        newSavedItem.text(savedDogsList[i])
+        pastSaves.prepend(newSavedItem);
+    }
+}
+
 saveBtn.addEventListener("click", function(){
 var idEl = document.getElementById('dogId').innerHTML;
 if(idEl == null || idEl == ""){
@@ -99,7 +120,7 @@ if(idEl == null || idEl == ""){
         name: document.getElementById("dogName").innerHTML,
         id: document.getElementById("dogId").innerHTML
     }
-    var savedDogsList;
+    
     if(JSON.parse(localStorage.getItem("savedDogs")) == null){
         savedDogsList = [];
     } else{
@@ -108,14 +129,7 @@ if(idEl == null || idEl == ""){
     savedDogsList.push(dogObj);
     localStorage.setItem("savedDogs", JSON.stringify(savedDogsList));
     console.log(savedDogsList);
-    
-    function renderHistory(){
-        for (i=0;i<=savedDogsList.length;i++){
-            var li = document.createElement("li");
-            li.appendChild(document.createTextNode(savedDogsList[i].name));
-            savedList.appendChild(li);
-        }
-    }
+
     renderHistory();
 }})
 
