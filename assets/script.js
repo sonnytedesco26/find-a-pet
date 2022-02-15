@@ -129,6 +129,21 @@ if(idEl == null || idEl == ""){
     savedDogsList.push(dogObj);
     localStorage.setItem("savedDogs", JSON.stringify(savedDogsList));
     console.log(savedDogsList);
+<<<<<<< HEAD
+=======
+
+    function savedDogs(){
+        var savedDogsList = localStorage.getItem($("#dogname"));
+        var savedDogsList = localStorage.getItem($("#dogId"));
+        document.getElementById('dogname').value = currentDogname
+        document.getElementById('dogID').value = currentDogId
+
+    }
+}
+}
+)
+
+>>>>>>> 3fd780b05a1fe7a4209b599009b0f5a734a687e5
 
     renderHistory();
 }})
