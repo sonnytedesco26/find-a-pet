@@ -13,6 +13,7 @@ var image = document.getElementById("image");
 var savedList = document.getElementById("saved-list");
 var pastSaves = $("#pastSaves");
 
+
 var dogName = $("#dogName");
 var dogAge = $("#dogAge");
 var dogBreed = $("#dogBreed");
@@ -29,7 +30,7 @@ if (JSON.parse(localStorage.getItem("savedDogs")) == null) {
     renderHistory();
 }
 
-function renderDog(name, age, breed, pic, gender, contact, id){
+function renderDog(name, age, breed, pic, gender, contact, id) {
     dogName.text(name);
     dogAge.text(`Age: ${age}`);
     dogBreed.text(`Primary breed: ${breed}`);
@@ -55,8 +56,8 @@ searchBtn.addEventListener("click", function (e) {
     }).then(function (data) {
         console.log('token', data)
         return fetch('https://api.petfinder.com/v2/animals?location=' + userInput + '&page=1&type=dog&limit=1&sort=random', {
-        
-        //return fetch('https://api.petfinder.com/v2/animals/53169484', {
+
+            //return fetch('https://api.petfinder.com/v2/animals/53169484', {
             headers: {
                 'Authorization': data.token_type + ' ' + data.access_token,
 
@@ -70,7 +71,6 @@ searchBtn.addEventListener("click", function (e) {
             console.log(data.animals[0].id);
 
             renderDog(data.animals[0].name, data.animals[0].age, data.animals[0].breeds.primary, data.animals[0].photos[0].medium, data.animals[0].gender, data.animals[0].contact.email, data.animals[0].id);
-            //renderDog(data.animal.name, data.animal.age, data.animal.breeds.primary, data.animal.photos[0].medium, data.animal.gender, data.animal.contact.email);
 
 
         })
@@ -81,6 +81,7 @@ searchBtn.addEventListener("click", function (e) {
 
 
 });
+var clickDog = document.getElementById("clickHistory")
 
 $(document).on("click", "#clickHistory", function() {
     savedDogsList = JSON.parse(localStorage.getItem("savedDogs"));
@@ -120,13 +121,13 @@ $(document).on("click", "#clickHistory", function() {
 
 factBtn.addEventListener('click', createFact);
 function createFact() {
-    document.getElementById("dogfact").innerHTML = 
+    document.getElementById("dogfact").innerHTML =
         dogArray[Math.floor(Math.random() * dogArray.length)];
     fetch(`https://dog.ceo/api/breeds/image/random`)
         .then(res => res.json())
         .then(result => {
             (image.src = result.message)
-            
+
         })
         .catch(err => console.log(err))
 }
@@ -152,25 +153,28 @@ if(idEl == null || idEl == ""){
     localStorage.setItem("savedDogs", JSON.stringify(savedDogsList));
     console.log(savedDogsList);
 
-    renderHistory();
-}})
+        renderHistory();
+    }
+})
 
 
-function renderHistory(){
+function renderHistory() {
     pastSaves.empty();
 
     savedDogsList = JSON.parse(localStorage.getItem("savedDogs"));
     for (i=0; i < savedDogsList.length; i++){
         var newSavedItem = $("<div>").attr("id", "clickHistory");
-        if(savedDogsList?.length > 0){
+        if (savedDogsList?.length > 0) {
             newSavedItem.text(`${savedDogsList[i].name} ---- ${savedDogsList[i].id}`);
             pastSaves.prepend(newSavedItem);
         }
     }
 }
 
+
 clearBtn.addEventListener("click", clearHistory)
 function clearHistory() {
     document.getElementById("pastSaves").innerHTML = "";
     localStorage.clear();
+
 }
