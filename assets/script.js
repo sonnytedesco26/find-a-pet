@@ -32,11 +32,11 @@ if (JSON.parse(localStorage.getItem("savedDogs")) == null) {
 
 function renderDog(name, age, breed, pic, gender, contact, id) {
     dogName.text(name);
-    dogAge.text(age);
-    dogBreed.text(breed);
+    dogAge.text(`Age: ${age}`);
+    dogBreed.text(`Primary breed: ${breed}`);
     dogPic.attr("src", pic);
-    dogGender.text(gender);
-    dogContact.text(contact);
+    dogGender.text(`Gender: ${gender}`);
+    dogContact.text(`Contact email: ${contact}`);
     dogId.text(id);
 }
 
