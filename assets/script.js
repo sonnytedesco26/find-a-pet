@@ -153,15 +153,6 @@ if(idEl == null || idEl == ""){
     localStorage.setItem("savedDogs", JSON.stringify(savedDogsList));
     console.log(savedDogsList);
 
-        if (JSON.parse(localStorage.getItem("savedDogs")) == null) {
-            savedDogsList = [];
-        } else {
-            savedDogsList = JSON.parse(localStorage.getItem("savedDogs"));
-        }
-        savedDogsList.push(dogObj);
-        localStorage.setItem("savedDogs", JSON.stringify(savedDogsList));
-        console.log(savedDogsList);
-
         renderHistory();
     }
 })
