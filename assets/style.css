@@ -10,3 +10,28 @@ h1 {
 h4 {
     background: linear-gradient(45deg, #07fff362, transparent);
 }
+
+#dogId {
+  visibility: hidden;
+}
+
+#pastSaves{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#clickHistory{
+  cursor: pointer;
+  margin-top: 5px;
+  background-color: aqua;
+  border-radius: 5px;
+  display: inline-block;
+  align-items: center;
+  padding: 4px;
+}
+
+#clickHistory:hover{
+  background-color:rgb(0, 211, 211);
+  transition: 0.3s;
+}
