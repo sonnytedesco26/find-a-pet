@@ -9,7 +9,10 @@ var saveBtn = document.getElementById("saveDog");;
 var clearBtn = document.getElementById("clear");
 var searchBtn = document.getElementById("search");
 var factBtn = document.getElementById('fact-btn');
-var image = document.getElementById("image")
+var image = document.getElementById("image");
+var savedList = document.getElementById("saved-list");
+var pastSaves = $("#pastSaves");
+
 
 var dogName = $("#dogName");
 var dogAge = $("#dogAge");
@@ -17,15 +20,24 @@ var dogBreed = $("#dogBreed");
 var dogPic = $("#dogPic");
 var dogGender = $("#dogGender");
 var dogContact = $("#dogContact");
+var dogId = $("#dogId");
 
+var savedDogsList;
 
-function renderDog(name, age, breed, pic, gender, contact){
+if (JSON.parse(localStorage.getItem("savedDogs")) == null) {
+    console.log("saved dogs empty")
+} else {
+    renderHistory();
+}
+
+function renderDog(name, age, breed, pic, gender, contact, id) {
     dogName.text(name);
     dogAge.text(age);
     dogBreed.text(breed);
     dogPic.attr("src", pic);
     dogGender.text(gender);
     dogContact.text(contact);
+    dogId.text(id);
 }
 
 
@@ -43,8 +55,9 @@ searchBtn.addEventListener("click", function (e) {
         return response.json();
     }).then(function (data) {
         console.log('token', data)
-
         return fetch('https://api.petfinder.com/v2/animals?location=' + userInput + '&page=1&type=dog&limit=1&sort=random', {
+
+            //return fetch('https://api.petfinder.com/v2/animals/53169484', {
             headers: {
                 'Authorization': data.token_type + ' ' + data.access_token,
 
@@ -54,11 +67,12 @@ searchBtn.addEventListener("click", function (e) {
             return response.json();
 
         }).then(function (data) {
-            console.log(userInput, data)
-           // return `<p>Name: </p> ${data.name}`
-            console.log(data.animals[0].id)
-            console.log(data.animals[0].name, data.animals[0].age, data.animals[0].breeds.primary, data.animals[0].photos[0].medium, data.animals[0].gender, data.animals[0].contact.email);
-            renderDog(data.animals[0].name, data.animals[0].age, data.animals[0].breeds.primary, data.animals[0].photos[0].medium, data.animals[0].gender, data.animals[0].contact.email);
+            console.log(userInput, data);
+            console.log(data.animals[0].id);
+
+            renderDog(data.animals[0].name, data.animals[0].age, data.animals[0].breeds.primary, data.animals[0].photos[0].medium, data.animals[0].gender, data.animals[0].contact.email, data.animals[0].id);
+
+
         })
 
     }).catch(function (error) {
@@ -67,29 +81,100 @@ searchBtn.addEventListener("click", function (e) {
 
 
 });
+var clickDog = document.getElementById("clickHistory")
+
+$(document).on("click", "#clickHistory", function() {
+    savedDogsList = JSON.parse(localStorage.getItem("savedDogs"));
+    var dogHistoryId = $(this).text().split(' ---- ')[1];
+    console.log(dogHistoryId)
+    fetch("https://api.petfinder.com/v2/oauth2/token", {
+        method: "POST",
+        body: "grant_type=client_credentials&client_id=" + apiKey + "&client_secret=" + apiSecret,
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+        }
+    }).then(function (response) {
+        return response.json();
+    }).then(function (data) {
+        console.log('token', data)
+        return fetch(`https://api.petfinder.com/v2/animals/${dogHistoryId}`, {
+            headers: {
+                'Authorization': data.token_type + ' ' + data.access_token,
+
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(function (response) {
+            return response.json();
+
+        }).then(function (data) {
+            console.log(data.animal.id);
+
+            renderDog(data.animal.name, data.animal.age, data.animal.breeds.primary, data.animal.photos[0].medium, data.animal.gender, data.animal.contact.email);
+
+
+        })
+
+    }).catch(function (error) {
+        console.log('something went wrong', error)
+    })
+})
 
 factBtn.addEventListener('click', createFact);
 function createFact() {
-    document.getElementById("dogfact").innerHTML = 
+    document.getElementById("dogfact").innerHTML =
         dogArray[Math.floor(Math.random() * dogArray.length)];
     fetch(`https://dog.ceo/api/breeds/image/random`)
         .then(res => res.json())
         .then(result => {
             (image.src = result.message)
-            
+
         })
         .catch(err => console.log(err))
 }
 
-saveBtn.addEventListener("click", saveDog);
-function saveDog() {
-    
-}
 
+saveBtn.addEventListener("click", function(){
+var idEl = document.getElementById('dogId').innerHTML;
+if(idEl == null || idEl == ""){
+    window.alert("Must search dog to add to saved list")
+} else{
+    let dogObj = {
+        name: document.getElementById("dogName").innerHTML,
+        id: document.getElementById("dogId").innerHTML,
+        contact: document.getElementById("dogContact").innerHTML
+    }
+    
+    if(JSON.parse(localStorage.getItem("savedDogs")) == null){
+        savedDogsList = [];
+    } else{
+        savedDogsList = JSON.parse(localStorage.getItem("savedDogs"));
+    }
+    savedDogsList.push(dogObj);
+    localStorage.setItem("savedDogs", JSON.stringify(savedDogsList));
+    console.log(savedDogsList);
+
+        renderHistory();
+    }
+})
+
+
+function renderHistory() {
+    pastSaves.empty();
+
+    savedDogsList = JSON.parse(localStorage.getItem("savedDogs"));
+    for (i=0; i < savedDogsList.length; i++){
+        var newSavedItem = $("<div>").attr("id", "clickHistory");
+        if (savedDogsList?.length > 0) {
+            newSavedItem.text(`${savedDogsList[i].name} ---- ${savedDogsList[i].id}`);
+            pastSaves.prepend(newSavedItem);
+        }
+    }
+}
 
 
 clearBtn.addEventListener("click", clearHistory)
 function clearHistory() {
-    document.getElementById("saved-list").innerHTML = "";
+    document.getElementById("pastSaves").innerHTML = "";
     localStorage.clear();
+
 }
