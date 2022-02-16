@@ -107,7 +107,8 @@ if(idEl == null || idEl == ""){
 } else{
     let dogObj = {
         name: document.getElementById("dogName").innerHTML,
-        id: document.getElementById("dogId").innerHTML
+        //id: document.getElementById("dogId").innerHTML
+        contact: document.getElementById("dogContact").innerHTML
     }
     
     if(JSON.parse(localStorage.getItem("savedDogs")) == null){
@@ -127,10 +128,10 @@ function renderHistory(){
     pastSaves.empty();
 
     savedDogsList = JSON.parse(localStorage.getItem("savedDogs"));
-    for (i=0; i < savedDogsList.length;i++){
+    for (i=0; i < savedDogsList.length; i++){
         var newSavedItem = $("<div>").attr("id", "clickHistory");
         if(savedDogsList?.length > 0){
-            newSavedItem.text(`${savedDogsList[i].name} ---- ${savedDogsList[i].id}`);
+            newSavedItem.text(`${savedDogsList[i].name} ---- ${savedDogsList[i].contact}`);
             pastSaves.prepend(newSavedItem);
         }
     }
