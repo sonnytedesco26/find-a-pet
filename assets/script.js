@@ -83,7 +83,39 @@ searchBtn.addEventListener("click", function (e) {
 });
 
 $(document).on("click", "#clickHistory", function() {
+    savedDogsList = JSON.parse(localStorage.getItem("savedDogs"));
+    var dogHistoryId = $(this).text().split(' ---- ')[1];
+    console.log(dogHistoryId)
+    fetch("https://api.petfinder.com/v2/oauth2/token", {
+        method: "POST",
+        body: "grant_type=client_credentials&client_id=" + apiKey + "&client_secret=" + apiSecret,
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+        }
+    }).then(function (response) {
+        return response.json();
+    }).then(function (data) {
+        console.log('token', data)
+        return fetch(`https://api.petfinder.com/v2/animals/${dogHistoryId}`, {
+            headers: {
+                'Authorization': data.token_type + ' ' + data.access_token,
 
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(function (response) {
+            return response.json();
+
+        }).then(function (data) {
+            console.log(data.animal.id);
+
+            renderDog(data.animal.name, data.animal.age, data.animal.breeds.primary, data.animal.photos[0].medium, data.animal.gender, data.animal.contact.email);
+
+
+        })
+
+    }).catch(function (error) {
+        console.log('something went wrong', error)
+    })
 })
 
 factBtn.addEventListener('click', createFact);
@@ -107,7 +139,7 @@ if(idEl == null || idEl == ""){
 } else{
     let dogObj = {
         name: document.getElementById("dogName").innerHTML,
-        //id: document.getElementById("dogId").innerHTML
+        id: document.getElementById("dogId").innerHTML,
         contact: document.getElementById("dogContact").innerHTML
     }
     
@@ -131,7 +163,7 @@ function renderHistory(){
     for (i=0; i < savedDogsList.length; i++){
         var newSavedItem = $("<div>").attr("id", "clickHistory");
         if(savedDogsList?.length > 0){
-            newSavedItem.text(`${savedDogsList[i].name} ---- ${savedDogsList[i].contact}`);
+            newSavedItem.text(`${savedDogsList[i].name} ---- ${savedDogsList[i].id}`);
             pastSaves.prepend(newSavedItem);
         }
     }
