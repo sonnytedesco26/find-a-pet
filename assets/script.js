@@ -85,7 +85,7 @@ var clickDog = document.getElementById("clickHistory")
 
 $(document).on("click", "#clickHistory", function() {
     savedDogsList = JSON.parse(localStorage.getItem("savedDogs"));
-    var dogHistoryId = $(this).text().split(' ---- ')[1];
+    var dogHistoryId = $(this).text().split('  ')[1];
     console.log(dogHistoryId)
     fetch("https://api.petfinder.com/v2/oauth2/token", {
         method: "POST",
@@ -141,7 +141,9 @@ if(idEl == null || idEl == ""){
     let dogObj = {
         name: document.getElementById("dogName").innerHTML,
         id: document.getElementById("dogId").innerHTML,
-        contact: document.getElementById("dogContact").innerHTML
+        contact: document.getElementById("dogContact").innerHTML,
+        id: document.getElementById("dogId").style.display = ""
+
     }
     
     if(JSON.parse(localStorage.getItem("savedDogs")) == null){
@@ -165,7 +167,8 @@ function renderHistory() {
     for (i=0; i < savedDogsList.length; i++){
         var newSavedItem = $("<div>").attr("id", "clickHistory");
         if (savedDogsList?.length > 0) {
-            newSavedItem.text(`${savedDogsList[i].name} ---- ${savedDogsList[i].id}`);
+            newSavedItem.text(`${savedDogsList[i].name}   ${savedDogsList[i].id}`);
+            
             pastSaves.prepend(newSavedItem);
         }
     }
