@@ -160,7 +160,7 @@ if(idEl == null || idEl == ""){
 
 function renderHistory() {
     pastSaves.empty();
-
+///MAKE var undefined outsite if, then make 2 div attributes for each one (adjust css to get id div to be invisible)
     savedDogsList = JSON.parse(localStorage.getItem("savedDogs"));
     for (i=0; i < savedDogsList.length; i++){
         var newSavedItem = $("<div>").attr("id", "clickHistory");
