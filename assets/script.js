@@ -141,7 +141,7 @@ if(idEl == null || idEl == ""){
     let dogObj = {
         name: document.getElementById("dogName").innerHTML,
         id: document.getElementById("dogId").innerHTML,
-        contact: document.getElementById("dogContact").innerHTML
+       // contact: document.getElementById("dogContact").innerHTML
     }
     
     if(JSON.parse(localStorage.getItem("savedDogs")) == null){
@@ -149,11 +149,18 @@ if(idEl == null || idEl == ""){
     } else{
         savedDogsList = JSON.parse(localStorage.getItem("savedDogs"));
     }
-    savedDogsList.push(dogObj);
-    localStorage.setItem("savedDogs", JSON.stringify(savedDogsList));
-    console.log(savedDogsList);
+    console.log(savedDogsList)
+    console.log(dogObj)
+
+       if(dogObj.id === savedDogsList[savedDogsList.length-1].id){
+        console.log('cant save twice');
 
         renderHistory();
+    } else{
+        savedDogsList.push(dogObj);
+        localStorage.setItem("savedDogs", JSON.stringify(savedDogsList));
+        renderHistory();
+    }
     }
 })
 
