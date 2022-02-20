@@ -26,30 +26,33 @@
             <div class="card column is-3">
                 <h4 class="card-header m-2">Search by Zipcode:</h4>
                 <input id="zipInput" type="text" placeholder=" Enter zipcode" class="m-2 border">
-                <button id="search" class="btn btn-primary m-2" type="button">
+                <button id="search" class="btn btn-primary m-2 search" type="button">
                     Search
                 </button>
             </div>
             <div class="card .d-flex column is-9">
                 <h4 class="card-header m-2">Save your favorites to the list!</h4>
-                <div class="card column is-5">
-
-                    <div id="currentDog" class="p-3 card">
-                        <img id="dogPic" class="card-image-top">
+                <div class="card column is-12">
+                    <div id="currentDog" class="p-3">
+                        <img id="dogPic" class="card-image">
                         <div class="card-body">
-                        <h2 id="dogName" class="card-title"></h2>
-                        <p id="dogAge" class="card-text "></p>
-                        <p id="dogBreed"></p>
-                        <p id="dogGender"></p>
-                        <p id="dogContact"></p>
-                        <p id="dogId"></p>
+                            <div class="dog-info is-flex-direction-row">
+                                <h2 id="dogName" class="card-title"></h2>
+                                <p id="dogAge"></p>
+                                <p id="dogBreed"></p>
+                                <p id="dogGender"></p>
+                                <p id="dogContact"></p>
+                                <p id="dogId"></p>
+                                <button id="saveDog" class="btn btn-dark m-2 fav" type="button">
+                                    <favorite-star><span>&#11088;</span></favorite-star>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <button id="saveDog" class="btn btn-dark m-2 column is-2" type="button">
-                    <favorite-star><span>&#11088;</span></favorite-star>
-                </button>
             </div>
+
+        </div>
         </div>
 
         <div class="columns .d-flex pt-5">
@@ -58,22 +61,26 @@
                 <ul id="saved-list">
                     <div id="pastSaves"></div>
                 </ul>
-                <button id="clear" class="btn btn-dark m-2 p-2" type="button">
+                <button id="clear" class="btn btn-dark m-2 p-2 clear-btn" type="button">
                     Clear Saved List
                 </button>
             </div>
+
             <div class="card .d-flex column is-9">
                 <h4 class="card-header m-2">As A Future Dog Owner Here Are Some Must Know Facts</h4>
-                <div class="card column is-4">
-                    <img class="card-img-top" id="image" width="300px">
-                    <p id="dogfact" class="p-4 card-text"></p>
-
+                <div class="card column is-12">
+                    <div id="currentDogFact" class="p-3">
+                        <img class="card-image" id="image" width="300px">
+                        <p id="dogfact"></p>
+                    </div>
+                    <button id="fact-btn" class="btn btn-dark m-2 column is-2 fact" type="button">
+                        Random Fact Generator
+                    </button>
                 </div>
-                <button id="fact-btn" class="btn btn-dark m-2 column is-2" type="button">
-                    Random Fact Generator
-                </button>
             </div>
         </div>
+
+
 
 
 

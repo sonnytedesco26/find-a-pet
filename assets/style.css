@@ -1,14 +1,33 @@
 header {
   background: linear-gradient(45deg, #7aabd7, #0084f9);
+  border: solid;
+  border-color: #07fff362;
 }
 
 h1 {
     font-weight: 800;
-    
+    font-style: italic;
+    font-family: auto;
 }
 
 h4 {
     background: linear-gradient(45deg, #07fff362, transparent);
+}
+
+#dogPic {
+  float: right;
+  max-height: 300px;
+}
+
+#image {
+  float: left;
+  width: 300px;
+  max-height: 200px;
+}
+
+#dogfact {
+  float: right;
+  max-width: 400px;
 }
 
 #dogId {
@@ -34,4 +53,25 @@ h4 {
 #clickHistory:hover{
   background-color:rgb(0, 211, 211);
   transition: 0.3s;
+}
+
+.dog-info {
+  float: left;
+}
+
+.search {
+  background:linear-gradient(180deg, blue, transparent);
+  color: black;
+}
+
+.fav {
+  background: linear-gradient(180deg, black, transparent);
+}
+
+.clear-btn {
+  background: linear-gradient(180deg, black, transparent);
+}
+
+.fact {
+  background: linear-gradient(180deg, black, transparent);
 }
