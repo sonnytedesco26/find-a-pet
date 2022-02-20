@@ -35,3 +35,13 @@ h4 {
   background-color:rgb(0, 211, 211);
   transition: 0.3s;
 }
+
+/* For Mobile Phones Portrait or Landscape View */
+@media screen and (max-device-width: 640px) {
+  .gfg-div {
+    width: 400px;
+    height: 200px;
+    background-color: chartreuse;
+    color: black;
+  }
+}
