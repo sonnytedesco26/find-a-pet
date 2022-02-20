@@ -1,5 +1,7 @@
 header {
   background: linear-gradient(45deg, #7aabd7, #0084f9);
+  border: solid;
+  border-color: #07fff362;
 }
 
 h1 {
