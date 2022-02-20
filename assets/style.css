@@ -4,7 +4,8 @@ header {
 
 h1 {
     font-weight: 800;
-    
+    font-style: italic;
+    font-family: auto;
 }
 
 h4 {
@@ -54,4 +55,21 @@ h4 {
 
 .dog-info {
   float: left;
+}
+
+.search {
+  background:linear-gradient(180deg, blue, transparent);
+  color: black;
+}
+
+.fav {
+  background: linear-gradient(180deg, black, transparent);
+}
+
+.clear-btn {
+  background: linear-gradient(180deg, black, transparent);
+}
+
+.fact {
+  background: linear-gradient(180deg, black, transparent);
 }
