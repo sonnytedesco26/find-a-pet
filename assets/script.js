@@ -135,6 +135,7 @@ function createFact() {
 
 saveBtn.addEventListener("click", function(){
 var idEl = document.getElementById('dogId').innerHTML;
+// if (document.getElementById('dogId') === -1) savedDogsList.push(0);
 if(idEl == null || idEl == ""){
     window.alert("Must search dog to add to saved list")
 } else{
@@ -168,8 +169,8 @@ function renderHistory() {
         var newSavedItem = $("<div>").attr("id", "clickHistory");
         if (savedDogsList?.length > 0) {
             newSavedItem.text(`${savedDogsList[i].name}   ${savedDogsList[i].id}`);
-            
             pastSaves.prepend(newSavedItem);
+            // if (array.indexOf(value) === -1) array.push(value);
         }
     }
 }
