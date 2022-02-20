@@ -134,33 +134,53 @@ function createFact() {
 
 
 saveBtn.addEventListener("click", function(){
-var idEl = document.getElementById('dogId').innerHTML;
-if(idEl == null || idEl == ""){
-    window.alert("Must search dog to add to saved list")
-} else{
-    let dogObj = {
-        name: document.getElementById("dogName").innerHTML,
-        id: document.getElementById("dogId").innerHTML,
-        contact: document.getElementById("dogContact").innerHTML
+    var idEl = document.getElementById('dogId').innerHTML;
+    if(idEl == null || idEl == ""){
+        window.alert("Must search dog to add to saved list")
+    } else{
+        let dogObj = {
+            name: document.getElementById("dogName").innerHTML,
+            id: document.getElementById("dogId").innerHTML,
+        // contact: document.getElementById("dogContact").innerHTML
+        }
+        
+        if(JSON.parse(localStorage.getItem("savedDogs")) == null){
+            savedDogsList = [];
+        } else{
+            savedDogsList = JSON.parse(localStorage.getItem("savedDogs"));
+        }
+
+        function containsObject(obj, array){
+            var i
+            for(i=0;i<array.length;i++){
+                if(array[i].id === obj.id){
+                    return true;
+                } 
+            }
+            return false;
+        }
+            
+        
+
+        if(containsObject(dogObj, savedDogsList)){
+            console.log('cant save twice');
+
+            renderHistory();
+        } else{
+            savedDogsList.push(dogObj);
+            localStorage.setItem("savedDogs", JSON.stringify(savedDogsList));
+            renderHistory();
+        }
+            
     }
     
-    if(JSON.parse(localStorage.getItem("savedDogs")) == null){
-        savedDogsList = [];
-    } else{
-        savedDogsList = JSON.parse(localStorage.getItem("savedDogs"));
     }
-    savedDogsList.push(dogObj);
-    localStorage.setItem("savedDogs", JSON.stringify(savedDogsList));
-    console.log(savedDogsList);
-
-        renderHistory();
-    }
-})
+)
 
 
 function renderHistory() {
     pastSaves.empty();
-
+///MAKE var undefined outsite if, then make 2 div attributes for each one (adjust css to get id div to be invisible)
     savedDogsList = JSON.parse(localStorage.getItem("savedDogs"));
     for (i=0; i < savedDogsList.length; i++){
         var newSavedItem = $("<div>").attr("id", "clickHistory");
