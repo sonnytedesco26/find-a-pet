@@ -62,10 +62,14 @@ h4 {
 .search {
   background:linear-gradient(180deg, blue, transparent);
   color: black;
+
 }
 
 .fav {
   background: linear-gradient(180deg, black, transparent);
+   position: relative;
+  bottom: 0;
+  width: 100px;
 }
 
 .clear-btn {

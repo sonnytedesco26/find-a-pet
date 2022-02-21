@@ -1,15 +1,26 @@
-# find-a-pet
+# Find-A-Pet
 
-## User-story
-WHEN A ZIPCODE IS ENTERED
-THEN THE USER IS SHOWN DOG NAME, BREED, PHOTO, AND URL TO PETFINDER
-WHEN THE USER CLICKS THE URL
-THEN THEY ARE TAKEN TO THAT DOGS PROFILE
-WHEN THE USER CLICKS SAVE ON A DOG
-THEN THE DOG IS SAVED TO A BOOKMARK
-WHEN THE USER PRESSES RANDOM FACT BUTTON
-THEN THEY ARE SHOWN A RANDOM FACT ABOUT THAT DOG
-WHEN THE USER WANTS TO REVISIT A DOG PROFILE
-THEN THEY CLICK ON THE DOGS NAME IN THE SEARCH HISTORY
-WHEN THE USER WNATS TO DELETE THE SEARCH HISTORY
-THEN THEY CLICK CLEAR AND ALL DOGS ARE CLEARED
+## Purpose
+A website that allows users to search for a dog up for adoption in their area. The webite provides information for the dog inlcuding the breed, age, gender, and email contact. Users can also learn a random fact about dogs which is matched with a random picture of different dogs.
+
+## Built With
+* HTML
+* CSS
+* Bulma
+* Bootstrap
+* Javascript
+* Ajax
+* Petfinder API
+* DogCeo API 
+
+## Website
+[View Webpage](https://sonnytedesco26.github.io/find-a-pet/)
+![Webpage Screenshot](./assets/screenshot.png)
+![Demo](./assets/media/recording.mov)
+
+## Contribution
+Made by 
+Sonny Tedesco 
+Franklyn Tavarez 
+Nathaniel Kevin Rivera
+Xhemajl Camaj 
