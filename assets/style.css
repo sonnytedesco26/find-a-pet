@@ -10,14 +10,16 @@ h1 {
 h4 {
     background: linear-gradient(45deg, #07fff362, transparent);
 }
-
-.wrapper {
-  height: 100vh;
+.div{
+  background-color: transparent;
+}
+ .wrapper{
+  height: 120vh;
   overflow-y: auto;
   overflow-x: hidden;
   perspective: 10px;
-}
-heade{
+ }
+head{
   position: relative;
   display: flex;
   justify-content: center;
@@ -30,7 +32,7 @@ heade{
   transform: translate(-10px) scale(2);
 }
 .foreground{
-  transform: translate(-5px) scale(1.5);
+  transform: translate(-5px) scale(1);
 
 }
 

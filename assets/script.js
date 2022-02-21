@@ -143,7 +143,7 @@ if(idEl == null || idEl == ""){
         name: document.getElementById("dogName").innerHTML,
         id: document.getElementById("dogId").innerHTML,
         contact: document.getElementById("dogContact").innerHTML,
-        id: document.getElementById("dogId").style.display = ""
+        // id: document.getElementById("dogId").style.display = ""
 
     }
     
@@ -168,7 +168,7 @@ function renderHistory() {
     for (i=0; i < savedDogsList.length; i++){
         var newSavedItem = $("<div>").attr("id", "clickHistory");
         if (savedDogsList?.length > 0) {
-            newSavedItem.text(`${savedDogsList[i].name}   ${savedDogsList[i].id}`);
+            newSavedItem.text(`${savedDogsList[i].name} ---- ${savedDogsList[i].id}`);
             pastSaves.prepend(newSavedItem);
             // if (array.indexOf(value) === -1) array.push(value);
         }
